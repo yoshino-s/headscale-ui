@@ -3,6 +3,8 @@ name: Production Release
 on:
   workflow_dispatch:
   push:
+    branches:
+      - "*"
     tags:        
       - v*
 
