@@ -1,3 +1,5 @@
+import { Suspense } from 'react';
+
 import { Notifications } from '@mantine/notifications';
 
 import '@mantine/core/styles.css';
@@ -11,7 +13,9 @@ export default function App() {
   return (
     <Provider theme={theme}>
       <Notifications />
-      <Router />
+      <Suspense>
+        <Router />
+      </Suspense>
     </Provider>
   );
 }

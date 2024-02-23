@@ -1,5 +1,3 @@
-import { useEffect } from 'react';
-
 import {
   Anchor,
   Button,
@@ -19,23 +17,18 @@ import { useNavigate } from 'react-router-dom';
 import classes from './Login.module.css';
 
 import { headscaleServiceListApiKeys } from '@/request';
-import { useConfig } from '@/utils/useConfig';
+import { getConfig } from '@/utils/useConfig';
 
 export default function LoginPage() {
   const navigate = useNavigate();
-  const { url, token, setUrl, setToken } = useConfig();
+  const { url, token } = getConfig();
 
   const form = useForm({
     initialValues: {
-      url: '',
-      token: '',
+      url: url,
+      token: token,
     },
   });
-
-  useEffect(() => {
-    form.setFieldValue('url', url);
-    form.setFieldValue('token', token);
-  }, [url, token, form]);
 
   function submit(values: { url: string; token: string }) {
     headscaleServiceListApiKeys({
@@ -44,14 +37,19 @@ export default function LoginPage() {
         Authorization: `Bearer ${values.token}`,
       },
     })
-      .then(() => {
-        setUrl(values.url);
-        setToken(values.token);
+      .then((resp) => {
+        if (!resp.apiKeys?.length) {
+          throw new Error('Invalid API Endpoint');
+        }
+        localStorage.setItem('url', values.url);
+        localStorage.setItem('token', values.token);
         navigate('/');
       })
       .catch((e: AxiosError) => {
         let data = e.response?.data;
-        if (typeof data !== 'string') {
+        if (!data) {
+          data = e.toString();
+        } else if (typeof data !== 'string') {
           data = JSON.stringify(data);
         }
         notifications.show({

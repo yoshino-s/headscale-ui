@@ -2,10 +2,10 @@
 
 import { Container, TypographyStylesProvider } from '@mantine/core';
 
-import { useConfig } from '@/utils/useConfig';
+import { getConfig } from '@/utils/useConfig';
 
 export default function WindowsPage() {
-  const { url } = useConfig();
+  const { url } = getConfig();
 
   return (
     <Container mt="md">
