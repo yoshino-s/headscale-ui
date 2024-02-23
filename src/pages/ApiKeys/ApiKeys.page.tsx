@@ -35,7 +35,7 @@ function isExpire(apiKeys: V1ApiKey) {
   return new Date(apiKeys.expiration!) < new Date();
 }
 
-export function ApiKeysPage() {
+export default function ApiKeysPage() {
   const [, setMeta] = useMetadata();
   useEffect(() => {
     setMeta({

@@ -3,12 +3,14 @@ import { lazy } from 'react';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import { MainLayout } from './layout/Main.layout';
-import { ApiKeysPage } from './pages/ApiKeys/ApiKeys.page';
-import { HomePage } from './pages/Home/Home.page';
-import { LoginPage } from './pages/Login/Login.page';
-import { PreAuthKeysPage } from './pages/PreAuthKeys/PreAuthKeys.page';
-import { UsersPage } from './pages/Users/Users.page';
 
+const HomePage = lazy(() => import('./pages/Home/Home.page'));
+const ApiKeysPage = lazy(() => import('./pages/ApiKeys/ApiKeys.page'));
+const LoginPage = lazy(() => import('./pages/Login/Login.page'));
+const PreAuthKeysPage = lazy(
+  () => import('./pages/PreAuthKeys/PreAuthKeys.page'),
+);
+const UsersPage = lazy(() => import('./pages/Users/Users.page'));
 const DocsPage = lazy(() => import('./pages/Docs/Docs.page'));
 const MachinesPage = lazy(() => import('./pages/Machines/Machines.page'));
 const RoutesPage = lazy(() => import('./pages/Routes/Routes.page'));

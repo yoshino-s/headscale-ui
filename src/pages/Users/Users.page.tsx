@@ -38,7 +38,7 @@ import {
 import { useMetadata } from '@/utils/useMetadata';
 import { callQuery, useSwrQuery } from '@/utils/useQuery';
 
-export function UsersPage() {
+export default function UsersPage() {
   const [, setMeta] = useMetadata();
   useEffect(() => {
     setMeta({

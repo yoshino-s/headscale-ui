@@ -86,7 +86,7 @@ function Status({
   );
 }
 
-export function HomePage() {
+export default function HomePage() {
   const [, setMeta] = useMetadata();
 
   useEffect(() => {

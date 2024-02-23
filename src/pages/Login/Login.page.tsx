@@ -21,7 +21,7 @@ import classes from './Login.module.css';
 import { headscaleServiceListApiKeys } from '@/request';
 import { useConfig } from '@/utils/useConfig';
 
-export function LoginPage() {
+export default function LoginPage() {
   const navigate = useNavigate();
   const { url, token, setUrl, setToken } = useConfig();
 

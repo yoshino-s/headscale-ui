@@ -36,7 +36,7 @@ function isExpire(preAuthKeys: V1PreAuthKey) {
   return new Date(preAuthKeys.expiration!) < new Date();
 }
 
-export function PreAuthKeysPage() {
+export default function PreAuthKeysPage() {
   const params = useParams();
   const user = params.user!;
 
