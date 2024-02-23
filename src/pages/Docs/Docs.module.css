@@ -1,0 +1,21 @@
+.tab {
+  font-size: var(--mantine-font-size-md);
+  padding: var(--mantine-spacing-sm) var(--mantine-spacing-md);
+
+  &[data-active] {
+    z-index: 1;
+    background-color: var(--mantine-color-body);
+  }
+}
+
+.list {
+  padding-left: var(--mantine-spacing-xl);
+
+  @mixin light {
+    background-color: var(--mantine-color-gray-0);
+  }
+
+  @mixin dark {
+    background-color: var(--mantine-color-dark-8);
+  }
+}
