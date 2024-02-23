@@ -14,8 +14,9 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: write
       packages: write
+      
     strategy:
       matrix:
         node-version: [21]
