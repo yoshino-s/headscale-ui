@@ -3,8 +3,6 @@ name: Production Release
 on:
   workflow_dispatch:
   push:
-    branches:    
-      - main
     tags:        
       - v*
 
@@ -40,7 +38,10 @@ jobs:
         run: pnpm install
 
       - name: Build
-        run: pnpm build
+        run: |
+          pnpm build
+          zip -r headscale-ui.zip dist/*
+      
 
       - name: Log in to the Container registry
         uses: docker/login-action@v3
@@ -69,7 +70,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          tag_name: ${{ env.VERSION }}
+          tag_name: ${{ steps.meta.outputs.tags }}
           release_name: headscale-ui
           draft: true
           prerelease: false
@@ -80,13 +81,12 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ${{ steps.extract.outputs.destination }}/headscale-ui.zip
+          asset_path: headscale-ui.zip
           asset_name: headscale-ui.zip
           asset_content_type: application/zip
 
       - name: publish release
         uses: eregon/publish-release@v1
-        if: ${{ env.NOT_PREVIOUSLY_PUBLISHED != 0 }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
