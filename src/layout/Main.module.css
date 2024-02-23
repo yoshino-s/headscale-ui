@@ -1,11 +1,12 @@
 .link {
-  width: rem(50px);
   height: rem(50px);
+  width: rem(50px);
   border-radius: var(--mantine-radius-md);
   display: flex;
   align-items: center;
   justify-content: center;
   color: light-dark(var(--mantine-color-gray-7), var(--mantine-color-dark-0));
+  overflow: hidden;
 
   &:hover {
     background-color: light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-5));
@@ -37,7 +38,6 @@
 
 .header {
   padding-top: var(--mantine-spacing-xl);
-  max-width: rem(1082px);
   margin-left: auto;
   margin-right: auto;
   padding-bottom: calc(var(--mantine-spacing-xl) * 1.5);

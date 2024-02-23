@@ -148,14 +148,19 @@ export default function UsersPage() {
         </form>
       </Drawer>
 
-      <Container>
+      <Container
+        flex={1}
+        w="100%"
+        style={{
+          overflow: 'auto',
+        }}
+      >
         <Skeleton visible={isLoadingUsers} height={rem(240)}>
           <Table captionSide="bottom">
             <Table.Thead>
               <Table.Tr>
                 <Table.Th>ID</Table.Th>
                 <Table.Th>Username</Table.Th>
-                <Table.Th>Created At</Table.Th>
                 <Table.Th>Actions</Table.Th>
               </Table.Tr>
             </Table.Thead>
@@ -164,9 +169,6 @@ export default function UsersPage() {
                 <Table.Tr key={user.id}>
                   <Table.Td>{user.id}</Table.Td>
                   <Table.Td>{user.name}</Table.Td>
-                  <Table.Td>
-                    {new Date(user.createdAt!).toLocaleString()}
-                  </Table.Td>
                   <Table.Td>
                     <Group>
                       <Tooltip label="Edit">
@@ -216,9 +218,7 @@ export default function UsersPage() {
                 </Table.Tr>
               ))}
               <Table.Tr>
-                <Table.Td></Table.Td>
-                <Table.Td></Table.Td>
-                <Table.Td></Table.Td>
+                <Table.Td colSpan={2}></Table.Td>
                 <Table.Td>{users?.users?.length} users </Table.Td>
               </Table.Tr>
             </Table.Tbody>

@@ -146,7 +146,13 @@ export default function PreAuthKeysPage() {
         </form>
       </Drawer>
 
-      <Container>
+      <Container
+        flex={1}
+        w="100%"
+        style={{
+          overflow: 'auto',
+        }}
+      >
         <Skeleton visible={isLoadingPreAuthKeys} height={rem(240)}>
           <Group my="md">
             <Switch

@@ -212,7 +212,13 @@ export default function RoutesPage() {
         </Stack>
       </Drawer>
 
-      <Container>
+      <Container
+        flex={1}
+        w="100%"
+        style={{
+          overflow: 'auto',
+        }}
+      >
         <Skeleton visible={isLoadingRoutes} height={rem(240)}>
           <Stack my="md">
             <Select
@@ -235,7 +241,6 @@ export default function RoutesPage() {
                 <Table.Th>Prefix</Table.Th>
                 <Table.Th>Machine</Table.Th>
                 <Table.Th>Status</Table.Th>
-                <Table.Th>Created At</Table.Th>
                 <Table.Th>Actions</Table.Th>
               </Table.Tr>
             </Table.Thead>
@@ -259,9 +264,6 @@ export default function RoutesPage() {
                           toggleStatus(route, e.target.checked);
                         }}
                       />
-                    </Table.Td>
-                    <Table.Td>
-                      {new Date(route.createdAt!).toLocaleString()}
                     </Table.Td>
                     <Table.Td>
                       <Group>
@@ -288,7 +290,7 @@ export default function RoutesPage() {
                   </Table.Tr>
                 ))}
               <Table.Tr>
-                <Table.Td colSpan={5}></Table.Td>
+                <Table.Td colSpan={4}></Table.Td>
                 <Table.Td>{routes?.routes?.length} routes</Table.Td>
               </Table.Tr>
             </Table.Tbody>

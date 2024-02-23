@@ -104,7 +104,7 @@ export default function ApiKeysPage() {
   }, []);
 
   return (
-    <Container>
+    <>
       <Drawer
         offset={8}
         position="right"
@@ -124,91 +124,94 @@ export default function ApiKeysPage() {
           </Button>
         </form>
       </Drawer>
-      <Skeleton visible={isLoadingApiKeys} height={rem(240)}>
-        <Group justify="space-between" my="md">
-          <Switch
-            label="Show expired"
-            checked={showExpired}
-            onChange={(event) => setShowExpired(event.currentTarget.checked)}
-          />
-        </Group>
-        <Table captionSide="bottom">
-          <Table.Thead>
-            <Table.Tr>
-              <Table.Th>ID</Table.Th>
-              <Table.Th>Prefix</Table.Th>
-              <Table.Th>Expiration</Table.Th>
-              <Table.Th>Last Seen</Table.Th>
-              <Table.Th>Created At</Table.Th>
-              <Table.Th>Actions</Table.Th>
-            </Table.Tr>
-          </Table.Thead>
-          <Table.Tbody>
-            {apiKeys?.apiKeys
-              ?.toSorted((a, b) => parseInt(a.id!) - parseInt(b.id!))
-              ?.map(
-                (apiKeys) =>
-                  (!isExpire(apiKeys) || showExpired) && (
-                    <Table.Tr
-                      key={apiKeys.id}
-                      className={isExpire(apiKeys) ? classes.expire : ''}
-                    >
-                      <Table.Td>{apiKeys.id}</Table.Td>
-                      <Table.Td>{apiKeys.prefix}</Table.Td>
-                      <Table.Td>
-                        {new Date(apiKeys.expiration!).toLocaleString()}
-                      </Table.Td>
-                      <Table.Td>
-                        {new Date(apiKeys.lastSeen!).toLocaleString()}
-                      </Table.Td>
-                      <Table.Td>
-                        {new Date(apiKeys.createdAt!).toLocaleString()}
-                      </Table.Td>
-                      <Table.Td>
-                        {!isExpire(apiKeys) && (
-                          <Group>
-                            <ActionIcon
-                              title="Delete"
-                              color="red"
-                              variant="light"
-                              onClick={() => openDeleteConfirmation(apiKeys)}
-                            >
-                              <IconTrash />
-                            </ActionIcon>
-                          </Group>
-                        )}
-                      </Table.Td>
-                    </Table.Tr>
-                  ),
-              )}
-            <Table.Tr>
-              <Table.Td colSpan={5}></Table.Td>
-              <Table.Td>
-                {showExpired
-                  ? apiKeys?.apiKeys?.length
-                  : apiKeys?.apiKeys?.filter((apiKeys) => !isExpire(apiKeys))
-                      .length}{' '}
-                keys
-              </Table.Td>
-            </Table.Tr>
-          </Table.Tbody>
-          <Table.Caption>
-            <ActionIcon
-              title="Add"
-              variant="filled"
-              onClick={() => {
-                form.setFieldValue(
-                  'expiration',
-                  new Date(Date.now() + 1000 * 60 * 60 * 24 * 365),
-                );
-                open();
-              }}
-            >
-              <IconPlus />
-            </ActionIcon>
-          </Table.Caption>
-        </Table>
-      </Skeleton>
-    </Container>
+      <Container
+        w="100%"
+        flex={1}
+        style={{
+          overflow: 'auto',
+        }}
+      >
+        <Skeleton visible={isLoadingApiKeys} height={rem(240)}>
+          <Group justify="space-between" my="md">
+            <Switch
+              label="Show expired"
+              checked={showExpired}
+              onChange={(event) => setShowExpired(event.currentTarget.checked)}
+            />
+          </Group>
+          <Table captionSide="bottom">
+            <Table.Thead>
+              <Table.Tr>
+                <Table.Th>ID</Table.Th>
+                <Table.Th>Prefix</Table.Th>
+                <Table.Th>Expiration</Table.Th>
+                <Table.Th>Actions</Table.Th>
+              </Table.Tr>
+            </Table.Thead>
+            <Table.Tbody>
+              {apiKeys?.apiKeys
+                ?.toSorted((a, b) => parseInt(a.id!) - parseInt(b.id!))
+                ?.map(
+                  (apiKeys) =>
+                    (!isExpire(apiKeys) || showExpired) && (
+                      <Table.Tr
+                        key={apiKeys.id}
+                        className={isExpire(apiKeys) ? classes.expire : ''}
+                      >
+                        <Table.Td>{apiKeys.id}</Table.Td>
+                        <Table.Td>{apiKeys.prefix}</Table.Td>
+                        <Table.Td>
+                          {new Date(apiKeys.expiration!).toLocaleString()}
+                        </Table.Td>
+                        <Table.Td>
+                          {new Date(apiKeys.createdAt!).toLocaleString()}
+                        </Table.Td>
+                        <Table.Td>
+                          {!isExpire(apiKeys) && (
+                            <Group>
+                              <ActionIcon
+                                title="Delete"
+                                color="red"
+                                variant="light"
+                                onClick={() => openDeleteConfirmation(apiKeys)}
+                              >
+                                <IconTrash />
+                              </ActionIcon>
+                            </Group>
+                          )}
+                        </Table.Td>
+                      </Table.Tr>
+                    ),
+                )}
+              <Table.Tr>
+                <Table.Td colSpan={4}></Table.Td>
+                <Table.Td>
+                  {showExpired
+                    ? apiKeys?.apiKeys?.length
+                    : apiKeys?.apiKeys?.filter((apiKeys) => !isExpire(apiKeys))
+                        .length}{' '}
+                  keys
+                </Table.Td>
+              </Table.Tr>
+            </Table.Tbody>
+            <Table.Caption>
+              <ActionIcon
+                title="Add"
+                variant="filled"
+                onClick={() => {
+                  form.setFieldValue(
+                    'expiration',
+                    new Date(Date.now() + 1000 * 60 * 60 * 24 * 365),
+                  );
+                  open();
+                }}
+              >
+                <IconPlus />
+              </ActionIcon>
+            </Table.Caption>
+          </Table>
+        </Skeleton>
+      </Container>
+    </>
   );
 }

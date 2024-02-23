@@ -325,7 +325,13 @@ export default function MachinesPage() {
         </form>
       </Drawer>
 
-      <Container>
+      <Container
+        flex={1}
+        w="100%"
+        style={{
+          overflow: 'auto',
+        }}
+      >
         <Skeleton visible={isLoadingMachines} height={rem(240)}>
           <Stack my="md">
             <Select
@@ -346,7 +352,6 @@ export default function MachinesPage() {
                 <Table.Th>Given Name</Table.Th>
                 <Table.Th>IP Address</Table.Th>
                 <Table.Th>Tags</Table.Th>
-                <Table.Th>Created At</Table.Th>
                 <Table.Th>Actions</Table.Th>
               </Table.Tr>
             </Table.Thead>
@@ -375,9 +380,6 @@ export default function MachinesPage() {
                           </Badge>
                         ))}
                       </Group>
-                    </Table.Td>
-                    <Table.Td>
-                      {new Date(machine.createdAt!).toLocaleString()}
                     </Table.Td>
                     <Table.Td>
                       <Group>
@@ -412,9 +414,7 @@ export default function MachinesPage() {
                   </Table.Tr>
                 ))}
               <Table.Tr>
-                <Table.Td></Table.Td>
-                <Table.Td></Table.Td>
-                <Table.Td></Table.Td>
+                <Table.Td colSpan={4}></Table.Td>
                 <Table.Td>{machines?.machines?.length} machines</Table.Td>
               </Table.Tr>
             </Table.Tbody>

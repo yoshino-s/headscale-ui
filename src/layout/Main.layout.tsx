@@ -3,6 +3,8 @@ import { Suspense, useCallback } from 'react';
 import {
   AppShell,
   Box,
+  Burger,
+  Group,
   Stack,
   Text,
   Title,
@@ -11,6 +13,7 @@ import {
   rem,
   useMantineColorScheme,
 } from '@mantine/core';
+import { useDisclosure, useMediaQuery } from '@mantine/hooks';
 
 import {
   Icon,
@@ -71,6 +74,7 @@ const mockdata = [
 export function MainLayout() {
   const [meta] = useMetadata();
   const { colorScheme, setColorScheme } = useMantineColorScheme();
+  const isMobile = useMediaQuery('(max-width: 768px)');
 
   const toggleColorScheme = useCallback(() => {
     if (colorScheme === 'light') setColorScheme('dark');
@@ -82,8 +86,24 @@ export function MainLayout() {
     <NavbarLink {...link} key={link.label} />
   ));
 
+  const [opened, { toggle }] = useDisclosure(false);
   return (
-    <AppShell navbar={{ width: rem(50), breakpoint: 'xs' }}>
+    <AppShell
+      header={{
+        height: 60,
+        collapsed: !isMobile,
+      }}
+      navbar={{
+        width: 50,
+        breakpoint: 'sm',
+        collapsed: { mobile: !opened },
+      }}
+    >
+      <AppShell.Header>
+        <Group h="100%" px="md">
+          <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
+        </Group>
+      </AppShell.Header>
       <AppShell.Navbar
         style={{
           display: 'flex',
@@ -95,6 +115,7 @@ export function MainLayout() {
           style={{
             flexGrow: 1,
           }}
+          onClick={isMobile ? toggle : undefined}
         >
           {links}
         </Stack>
@@ -117,7 +138,12 @@ export function MainLayout() {
           />
         </Stack>
       </AppShell.Navbar>
-      <AppShell.Main>
+      <AppShell.Main
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+        }}
+      >
         <div className={classes.wrapper}>
           <Box className={classes.header} mod={{ 'with-tabs': meta.withTabs }}>
             <Title className={classes.title}>{meta.title}</Title>
