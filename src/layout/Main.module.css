@@ -7,6 +7,11 @@
   justify-content: center;
   color: light-dark(var(--mantine-color-gray-7), var(--mantine-color-dark-0));
   overflow: hidden;
+  text-decoration: none;
+
+  @media (max-width: $mantine-breakpoint-sm) {
+    width: 100%;
+  }
 
   &:hover {
     background-color: light-dark(var(--mantine-color-gray-0), var(--mantine-color-dark-5));

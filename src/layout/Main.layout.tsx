@@ -42,20 +42,29 @@ interface NavbarLinkProps {
 }
 
 function NavbarLink({ icon: Icon, label, to, onClick }: NavbarLinkProps) {
+  const isMobile = useMediaQuery('(max-width: 768px)');
+
+  const inner = (
+    <Group w="100%" ml="md">
+      <Icon style={{ width: rem(20), height: rem(20) }} stroke={1.5} />
+      {isMobile ? <Text>{label}</Text> : null}
+    </Group>
+  );
+
   return (
     <Tooltip label={label} position="right" transitionProps={{ duration: 0 }}>
       {to ? (
         <NavLink
           className={({ isActive }) => {
-            return `${classes.link} ${isActive ? classes['link-active'] : ''}`;
+            return `${classes.link} ${isActive ? classes['link-active'] : ''} {}`;
           }}
           to={to}
         >
-          <Icon style={{ width: rem(20), height: rem(20) }} stroke={1.5} />
+          {inner}
         </NavLink>
       ) : (
         <UnstyledButton className={classes.link} onClick={onClick}>
-          <Icon style={{ width: rem(20), height: rem(20) }} stroke={1.5} />
+          {inner}
         </UnstyledButton>
       )}
     </Tooltip>

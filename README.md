@@ -1,34 +1,23 @@
-# Mantine Vite template
+# Headscale-UI
+
+![alt text](./screenshots/dashboard.png)
 
 ## Features
 
-This template comes with the following features:
+- Light/Dark/Auto theme
+- Responsive design
+- TypeScript
 
-- [PostCSS](https://postcss.org/) with [mantine-postcss-preset](https://mantine.dev/styles/postcss-preset)
-- [TypeScript](https://www.typescriptlang.org/)
-- [Storybook](https://storybook.js.org/)
-- [Vitest](https://vitest.dev/) setup with [React Testing Library](https://testing-library.com/docs/react-testing-library/intro)
-- ESLint setup with [eslint-config-mantine](https://github.com/mantinedev/eslint-config-mantine)
+## Installation
 
-## npm scripts
+### Docker
 
-## Build and dev scripts
+```bash
+docker run -d -p 8080:80 headscale-ui
+```
 
-- `dev` – start development server
-- `build` – build production version of the app
-- `preview` – locally preview production build
+And goto http://localhost:8080/web/ to see the UI.
 
-### Testing scripts
+### Manual
 
-- `typecheck` – checks TypeScript types
-- `lint` – runs ESLint
-- `prettier:check` – checks files with Prettier
-- `vitest` – runs vitest tests
-- `vitest:watch` – starts vitest watch
-- `test` – runs `vitest`, `prettier:check`, `lint` and `typecheck` scripts
-
-### Other scripts
-
-- `storybook` – starts storybook dev server
-- `storybook:build` – build production storybook bundle to `storybook-static`
-- `prettier:write` – formats all files with Prettier
+Download the static assets from https://github.com/Yoshino-s/headscale-ui/releases and serve them with your favorite web server. Example with nginx: [nginx.conf](./nginx.conf)
