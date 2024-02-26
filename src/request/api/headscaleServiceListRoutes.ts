@@ -1,5 +1,5 @@
-import type { ResponseConfig } from "@kubb/swagger-client/client";
-import client from "@kubb/swagger-client/client";
+import type { ResponseConfig } from "@/utils/client";
+import client from "@/utils/client";
 import type { HeadscaleServiceGetMachineRoutesPathParams } from "../models/HeadscaleServiceGetMachineRoutes";
 import type { HeadscaleServiceGetRoutesQueryResponse } from "../models/HeadscaleServiceGetRoutes";
 import { headscaleServiceGetMachineRoutes } from "./headscaleServiceGetMachineRoutes";

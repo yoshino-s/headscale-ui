@@ -11,12 +11,12 @@ import {
 import { useForm } from '@mantine/form';
 import { notifications } from '@mantine/notifications';
 
-import { AxiosError } from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 import classes from './Login.module.css';
 
 import { headscaleServiceListApiKeys } from '@/request';
+import { ApiError } from '@/utils/client';
 import { getConfig } from '@/utils/useConfig';
 
 export default function LoginPage() {
@@ -33,9 +33,7 @@ export default function LoginPage() {
   function submit(values: { url: string; token: string }) {
     headscaleServiceListApiKeys({
       baseURL: values.url,
-      headers: {
-        Authorization: `Bearer ${values.token}`,
-      },
+      token: values.token,
     })
       .then((resp) => {
         if (!resp.apiKeys?.length) {
@@ -45,8 +43,8 @@ export default function LoginPage() {
         localStorage.setItem('token', values.token);
         navigate('/');
       })
-      .catch((e: AxiosError) => {
-        let data = e.response?.data;
+      .catch((e: ApiError) => {
+        let data = e?.data;
         if (!data) {
           data = e.toString();
         } else if (typeof data !== 'string') {

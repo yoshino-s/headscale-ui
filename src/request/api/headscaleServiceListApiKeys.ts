@@ -1,5 +1,5 @@
-import client from "@kubb/swagger-client/client";
-import type { ResponseConfig } from "@kubb/swagger-client/client";
+import client from "@/utils/client";
+import type { ResponseConfig } from "@/utils/client";
 import type { HeadscaleServiceListApiKeysQueryResponse } from "../models/HeadscaleServiceListApiKeys";
 
 /**

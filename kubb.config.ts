@@ -15,6 +15,11 @@ export default defineConfig({
   plugins: [
     createSwagger({ output: false }),
     createSwaggerTS({ output: { path: 'models' }, enumType: 'enum' }),
-    createSwaggerClient({ output: { path: './api' } }),
+    createSwaggerClient({
+      output: { path: './api' },
+      client: {
+        importPath: '@/utils/client',
+      },
+    }),
   ],
 });
