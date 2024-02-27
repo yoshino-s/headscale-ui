@@ -21,8 +21,8 @@ export class ApiError {
   ) {}
 }
 
-export const client = async <TData, TVariables = unknown>(
-  config: RequestConfig<TVariables>,
+export const client = async <TData = unknown, TVariables = unknown>(
+  config: RequestConfig<unknown | TVariables>,
 ): Promise<ResponseConfig<TData>> => {
   const cfg = getConfig();
 
