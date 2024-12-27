@@ -1,5 +1,3 @@
-/* eslint-disable react/no-unescaped-entities */
-
 import { Container, TypographyStylesProvider } from '@mantine/core';
 
 import { getConfig } from '@/utils/useConfig';

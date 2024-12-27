@@ -31,9 +31,12 @@ export default function LoginPage() {
   });
 
   function submit(values: { url: string; token: string }) {
+    console.log(values);
     headscaleServiceListApiKeys({
       baseURL: values.url,
-      token: values.token,
+      headers: {
+        Authorization: `Bearer ${values.token}`,
+      },
     })
       .then((resp) => {
         if (!resp.apiKeys?.length) {

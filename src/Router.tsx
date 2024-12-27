@@ -12,8 +12,9 @@ const PreAuthKeysPage = lazy(
 );
 const UsersPage = lazy(() => import('./pages/Users/Users.page'));
 const DocsPage = lazy(() => import('./pages/Docs/Docs.page'));
-const MachinesPage = lazy(() => import('./pages/Machines/Machines.page'));
+const NodesPage = lazy(() => import('./pages/Nodes/Nodes.page'));
 const RoutesPage = lazy(() => import('./pages/Routes/Routes.page'));
+const PolicyPage = lazy(() => import('./pages/Policy/Policy.page'));
 
 const router = createBrowserRouter(
   [
@@ -38,12 +39,12 @@ const router = createBrowserRouter(
           element: <PreAuthKeysPage />,
         },
         {
-          path: '/machines',
-          element: <MachinesPage />,
+          path: '/machine',
+          element: <NodesPage />,
         },
         {
-          path: '/machines/:user',
-          element: <MachinesPage />,
+          path: '/machine/:user',
+          element: <NodesPage />,
         },
         {
           path: '/routes',
@@ -56,6 +57,10 @@ const router = createBrowserRouter(
         {
           path: '/docs',
           element: <DocsPage />,
+        },
+        {
+          path: '/policy',
+          element: <PolicyPage />,
         },
       ],
     },

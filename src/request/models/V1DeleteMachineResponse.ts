@@ -1,1 +1,0 @@
-export type V1DeleteMachineResponse = object;

@@ -1,0 +1,1 @@
+{"type":"object","properties":{"id":{"type":"string"},"name":{"type":"string"},"createdAt":{"type":"string","format":"date-time"}},"x-readme-ref-name":"v1User"}

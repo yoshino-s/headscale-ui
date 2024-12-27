@@ -1,0 +1,1 @@
+{"type":"object","properties":{"users":{"type":"array","items":{"type":"object","properties":{"id":{"type":"string"},"name":{"type":"string"},"createdAt":{"type":"string","format":"date-time"}},"x-readme-ref-name":"v1User"}}},"x-readme-ref-name":"v1ListUsersResponse"}

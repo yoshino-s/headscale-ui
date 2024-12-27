@@ -1,8 +1,8 @@
-import type { V1ApiKey } from "./V1ApiKey";
+import type { V1ApiKey } from './V1ApiKey.ts'
 
 export type V1ListApiKeysResponse = {
-    /**
-     * @type array | undefined
-    */
-    apiKeys?: V1ApiKey[];
-};
+  /**
+   * @type array | undefined
+   */
+  apiKeys?: V1ApiKey[]
+}

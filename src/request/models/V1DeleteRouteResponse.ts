@@ -1,1 +1,1 @@
-export type V1DeleteRouteResponse = object;
+export type V1DeleteRouteResponse = object

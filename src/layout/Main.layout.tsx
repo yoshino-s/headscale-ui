@@ -17,6 +17,7 @@ import { useDisclosure, useMediaQuery } from '@mantine/hooks';
 
 import {
   Icon,
+  IconArrowsCross,
   IconBook,
   IconDevices2,
   IconFingerprint,
@@ -73,10 +74,11 @@ function NavbarLink({ icon: Icon, label, to, onClick }: NavbarLinkProps) {
 
 const mockdata = [
   { icon: IconHome2, label: 'Home', to: '/' },
-  { icon: IconDevices2, label: 'Machines', to: '/machines' },
+  { icon: IconDevices2, label: 'Nodes', to: '/machine' },
   { icon: IconRouter, label: 'Routes', to: '/routes' },
   { icon: IconUser, label: 'Users', to: '/users' },
   { icon: IconFingerprint, label: 'Api Keys', to: '/apikeys' },
+  { icon: IconArrowsCross, label: 'Policy', to: '/policy' },
   { icon: IconBook, label: 'Documents', to: '/docs' },
 ];
 

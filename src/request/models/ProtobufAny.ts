@@ -1,7 +1,7 @@
 export type ProtobufAny = {
-    /**
-     * @type string | undefined
-    */
-    "@type"?: string;
-    [key: string]: any;
-};
+  /**
+   * @type string | undefined
+   */
+  '@type'?: string
+  [key: string]: unknown
+}

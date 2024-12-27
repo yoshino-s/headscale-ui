@@ -94,12 +94,11 @@ export default function PreAuthKeysPage() {
   );
 
   const submit = useCallback(async (data: (typeof form)['values']) => {
-    console.log('123');
     await callQuery(headscaleServiceCreatePreAuthKey, {
       user,
       ephemeral: data.ephemeral,
       reusable: data.reusable,
-      expiration: data.expiration.toISOString(),
+      expiration: data.expiration,
       aclTags: data.aclTags,
     });
     mutate();

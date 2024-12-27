@@ -18,13 +18,14 @@ import { useDisclosure } from '@mantine/hooks';
 import { modals } from '@mantine/modals';
 import { notifications } from '@mantine/notifications';
 
-import { IconPlus, IconTrash } from '@tabler/icons-react';
+import { IconAlarm, IconPlus, IconTrash } from '@tabler/icons-react';
 
 import classes from './ApiKeys.module.css';
 
 import {
   V1ApiKey,
   headscaleServiceCreateApiKey,
+  headscaleServiceDeleteApiKey,
   headscaleServiceExpireApiKey,
   headscaleServiceListApiKeys,
 } from '@/request';
@@ -52,14 +53,42 @@ export default function ApiKeysPage() {
   const [showExpired, setShowExpired] = useState(false);
 
   const openDeleteConfirmation = useCallback(
-    (deleteApiKeys: V1ApiKey) =>
+    (apiKey: V1ApiKey) =>
       modals.openConfirmModal({
         title: 'Delete api key',
         children: (
           <Text>
             Are you sure you want to delete api key with prefix{' '}
             <Text w={500} c="red" display="inline">
-              {deleteApiKeys?.prefix}
+              {apiKey?.prefix}
+            </Text>
+            ?
+          </Text>
+        ),
+        labels: { confirm: 'Confirm', cancel: 'Cancel' },
+        onConfirm: async () => {
+          await callQuery(headscaleServiceDeleteApiKey, apiKey.prefix!);
+          mutate();
+          notifications.show({
+            title: 'Api key deleted',
+            message: `Api key with prefix ${apiKey.prefix} has been deleted`,
+            color: 'green',
+            autoClose: 5000,
+          });
+        },
+      }),
+    [],
+  );
+
+  const openExpireConfirmation = useCallback(
+    (apiKey: V1ApiKey) =>
+      modals.openConfirmModal({
+        title: 'Expire api key',
+        children: (
+          <Text>
+            Are you sure you want to expire api key with prefix{' '}
+            <Text w={500} c="red" display="inline">
+              {apiKey.prefix}
             </Text>
             ?
           </Text>
@@ -67,12 +96,12 @@ export default function ApiKeysPage() {
         labels: { confirm: 'Confirm', cancel: 'Cancel' },
         onConfirm: async () => {
           await callQuery(headscaleServiceExpireApiKey, {
-            prefix: deleteApiKeys.prefix,
+            prefix: apiKey.prefix,
           });
           mutate();
           notifications.show({
-            title: 'Api key deleted',
-            message: `Api key with prefix ${deleteApiKeys.prefix} has been deleted`,
+            title: 'Api key expired',
+            message: `Api key with prefix ${apiKey.prefix} has been expired`,
             color: 'green',
             autoClose: 5000,
           });
@@ -91,7 +120,7 @@ export default function ApiKeysPage() {
 
   const submit = useCallback(async (values: { expiration: Date }) => {
     await callQuery(headscaleServiceCreateApiKey, {
-      expiration: values.expiration.toISOString(),
+      expiration: values.expiration,
     });
     mutate();
     notifications.show({
@@ -145,6 +174,7 @@ export default function ApiKeysPage() {
                 <Table.Th>ID</Table.Th>
                 <Table.Th>Prefix</Table.Th>
                 <Table.Th>Expiration</Table.Th>
+                <Table.Th>Created At</Table.Th>
                 <Table.Th>Actions</Table.Th>
               </Table.Tr>
             </Table.Thead>
@@ -167,18 +197,26 @@ export default function ApiKeysPage() {
                           {new Date(apiKeys.createdAt!).toLocaleString()}
                         </Table.Td>
                         <Table.Td>
-                          {!isExpire(apiKeys) && (
-                            <Group>
+                          <Group>
+                            {!isExpire(apiKeys) && (
                               <ActionIcon
-                                title="Delete"
+                                title="Expire"
                                 color="red"
                                 variant="light"
-                                onClick={() => openDeleteConfirmation(apiKeys)}
+                                onClick={() => openExpireConfirmation(apiKeys)}
                               >
-                                <IconTrash />
+                                <IconAlarm />
                               </ActionIcon>
-                            </Group>
-                          )}
+                            )}
+                            <ActionIcon
+                              title="Delete"
+                              color="red"
+                              variant="light"
+                              onClick={() => openDeleteConfirmation(apiKeys)}
+                            >
+                              <IconTrash />
+                            </ActionIcon>
+                          </Group>
                         </Table.Td>
                       </Table.Tr>
                     ),

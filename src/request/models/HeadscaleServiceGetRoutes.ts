@@ -1,16 +1,19 @@
-import type { RpcStatus } from "./RpcStatus";
-import type { V1GetRoutesResponse } from "./V1GetRoutesResponse";
+import type { RpcStatus } from './RpcStatus.ts'
+import type { V1GetRoutesResponse } from './V1GetRoutesResponse.ts'
+
+/**
+ * @description A successful response.
+ */
+export type HeadscaleServiceGetRoutes200 = V1GetRoutesResponse
 
 /**
  * @description An unexpected error response.
-*/
-export type HeadscaleServiceGetRoutesError = RpcStatus;
+ */
+export type HeadscaleServiceGetRoutesError = RpcStatus
 
- /**
- * @description A successful response.
-*/
-export type HeadscaleServiceGetRoutesQueryResponse = V1GetRoutesResponse;
+export type HeadscaleServiceGetRoutesQueryResponse = HeadscaleServiceGetRoutes200
+
 export type HeadscaleServiceGetRoutesQuery = {
-    Response: HeadscaleServiceGetRoutesQueryResponse;
-    Errors: HeadscaleServiceGetRoutesError;
-};
+  Response: HeadscaleServiceGetRoutes200
+  Errors: any
+}

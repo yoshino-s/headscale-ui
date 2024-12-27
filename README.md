@@ -4,7 +4,7 @@
 
 ![screenshot](./screenshots/dashboard.png)
 
-![screenshot1](./screenshots/machines.png)
+![screenshot1](./screenshots/machine.png)
 
 ## Features
 

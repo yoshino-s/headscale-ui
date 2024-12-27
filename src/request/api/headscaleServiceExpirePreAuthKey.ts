@@ -1,15 +1,22 @@
-import client from "@/utils/client";
-import type { ResponseConfig } from "@/utils/client";
-import type { HeadscaleServiceExpirePreAuthKeyMutationRequest, HeadscaleServiceExpirePreAuthKeyMutationResponse } from "../models/HeadscaleServiceExpirePreAuthKey";
+import client from '@/utils/client'
+import type {
+  HeadscaleServiceExpirePreAuthKeyMutationRequest,
+  HeadscaleServiceExpirePreAuthKeyMutationResponse,
+} from '../models/HeadscaleServiceExpirePreAuthKey.ts'
+import type { RequestConfig } from '@/utils/client'
 
 /**
-     * @link /api/v1/preauthkey/expire */
-export async function headscaleServiceExpirePreAuthKey(data?: HeadscaleServiceExpirePreAuthKeyMutationRequest, options: Partial<Parameters<typeof client>[0]> = {}): Promise<ResponseConfig<HeadscaleServiceExpirePreAuthKeyMutationResponse>["data"]> {
-    const res = await client<HeadscaleServiceExpirePreAuthKeyMutationResponse, HeadscaleServiceExpirePreAuthKeyMutationRequest>({
-        method: "post",
-        url: `/api/v1/preauthkey/expire`,
-        data,
-        ...options
-    });
-    return res.data;
+ * {@link /api/v1/preauthkey/expire}
+ */
+export async function headscaleServiceExpirePreAuthKey(
+  data?: HeadscaleServiceExpirePreAuthKeyMutationRequest,
+  config: Partial<RequestConfig<HeadscaleServiceExpirePreAuthKeyMutationRequest>> = {},
+) {
+  const res = await client<HeadscaleServiceExpirePreAuthKeyMutationResponse, Error, HeadscaleServiceExpirePreAuthKeyMutationRequest>({
+    method: 'POST',
+    url: `/api/v1/preauthkey/expire`,
+    data,
+    ...config,
+  })
+  return res.data
 }

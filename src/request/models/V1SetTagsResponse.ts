@@ -1,5 +1,8 @@
-import type { V1Machine } from "./V1Machine";
+import type { V1Node } from './V1Node.ts'
 
 export type V1SetTagsResponse = {
-    machine?: V1Machine;
-};
+  /**
+   * @type object | undefined
+   */
+  node?: V1Node
+}

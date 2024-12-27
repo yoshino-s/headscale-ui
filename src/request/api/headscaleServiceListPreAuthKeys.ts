@@ -1,15 +1,11 @@
-import client from "@/utils/client";
-import type { ResponseConfig } from "@/utils/client";
-import type { HeadscaleServiceListPreAuthKeysQueryResponse, HeadscaleServiceListPreAuthKeysQueryParams } from "../models/HeadscaleServiceListPreAuthKeys";
+import client from '@/utils/client'
+import type { HeadscaleServiceListPreAuthKeysQueryResponse, HeadscaleServiceListPreAuthKeysQueryParams } from '../models/HeadscaleServiceListPreAuthKeys.ts'
+import type { RequestConfig } from '@/utils/client'
 
 /**
-     * @link /api/v1/preauthkey */
-export async function headscaleServiceListPreAuthKeys(params?: HeadscaleServiceListPreAuthKeysQueryParams, options: Partial<Parameters<typeof client>[0]> = {}): Promise<ResponseConfig<HeadscaleServiceListPreAuthKeysQueryResponse>["data"]> {
-    const res = await client<HeadscaleServiceListPreAuthKeysQueryResponse>({
-        method: "get",
-        url: `/api/v1/preauthkey`,
-        params,
-        ...options
-    });
-    return res.data;
+ * {@link /api/v1/preauthkey}
+ */
+export async function headscaleServiceListPreAuthKeys(params?: HeadscaleServiceListPreAuthKeysQueryParams, config: Partial<RequestConfig> = {}) {
+  const res = await client<HeadscaleServiceListPreAuthKeysQueryResponse, Error, unknown>({ method: 'GET', url: `/api/v1/preauthkey`, params, ...config })
+  return res.data
 }

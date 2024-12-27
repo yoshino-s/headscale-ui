@@ -1,0 +1,1 @@
+{"type":"object","properties":{"id":{"type":"string","format":"uint64"},"prefix":{"type":"string"},"expiration":{"type":"string","format":"date-time"},"createdAt":{"type":"string","format":"date-time"},"lastSeen":{"type":"string","format":"date-time"}},"x-readme-ref-name":"v1ApiKey"}

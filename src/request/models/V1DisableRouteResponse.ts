@@ -1,1 +1,1 @@
-export type V1DisableRouteResponse = object;
+export type V1DisableRouteResponse = object

@@ -22,18 +22,34 @@ import { useDisclosure } from '@mantine/hooks';
 import { modals } from '@mantine/modals';
 
 import { IconEdit, IconTrash } from '@tabler/icons-react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import {
+  HeadscaleServiceGetNodeRoutesPathParams,
   V1Route,
-  headscaleServiceDeleteMachine,
+  headscaleServiceDeleteNode,
   headscaleServiceDisableRoute,
   headscaleServiceEnableRoute,
-  headscaleServiceListMachines,
+  headscaleServiceGetNodeRoutes,
+  headscaleServiceGetRoutes,
+  headscaleServiceListNodes,
 } from '@/request';
-import { headscaleServiceListRoutes } from '@/request/api/headscaleServiceListRoutes';
 import { useMetadata } from '@/utils/useMetadata';
 import { callQuery, useSwrQuery } from '@/utils/useQuery';
+import type { RequestConfig } from '@kubb/plugin-client/clients/fetch';
+
+async function headscaleServiceGetMaybeNodeRoutes(
+  nodeId?: HeadscaleServiceGetNodeRoutesPathParams['nodeId'],
+  config: Partial<RequestConfig> = {},
+) {
+  console.log(nodeId);
+  if (!nodeId) {
+    console.log(nodeId);
+    return headscaleServiceGetRoutes(config);
+  } else {
+    return headscaleServiceGetNodeRoutes(nodeId, config);
+  }
+}
 
 function Status(props: { enabled?: boolean }) {
   return (
@@ -53,14 +69,14 @@ function Status(props: { enabled?: boolean }) {
 
 export default function RoutesPage() {
   const params = useParams();
-  const machineId = params.machineId ?? 'All';
+  const nodeId = params.nodeId ?? 'All';
   const navigate = useNavigate();
 
   const [, setMeta] = useMetadata();
   useEffect(() => {
     setMeta({
       title: 'Routes',
-      description: `Manage routes${machineId ? ` for ${machineId}` : ''}`,
+      description: `Manage routes${nodeId ? ` for ${nodeId}` : ''}`,
     });
   }, [setMeta]);
 
@@ -69,39 +85,37 @@ export default function RoutesPage() {
 
   const filterForm = useForm({
     initialValues: {
-      machineId: '',
+      nodeId: '',
     },
   });
 
   useEffect(() => {
-    filterForm.setFieldValue('machineId', machineId);
-  }, [machineId]);
+    filterForm.setFieldValue('nodeId', nodeId);
+  }, [nodeId]);
 
   useEffect(() => {
-    const machineId = filterForm.values.machineId;
-    if (machineId) {
+    const nodeId = filterForm.values.nodeId;
+    if (nodeId) {
       let url = '';
-      if (machineId === 'All') {
+      if (nodeId === 'All') {
         url = '/routes';
       } else {
-        url = `/routes/${machineId}`;
+        url = `/routes/${nodeId}`;
       }
       navigate(url, { replace: true });
     }
-  }, [filterForm.values.machineId]);
+  }, [filterForm.values.nodeId]);
 
   const {
     data: allRoutes,
     isLoading: isLoadingRoutes,
     mutate,
-  } = useSwrQuery(headscaleServiceListRoutes, {
-    machineId:
-      filterForm.values.machineId === 'All'
-        ? undefined
-        : filterForm.values.machineId,
-  });
+  } = useSwrQuery(
+    headscaleServiceGetMaybeNodeRoutes,
+    filterForm.values.nodeId === 'All' ? undefined : filterForm.values.nodeId,
+  );
 
-  const { data: machines } = useSwrQuery(headscaleServiceListMachines, {});
+  const { data: node } = useSwrQuery(headscaleServiceListNodes, {});
 
   const openDeleteConfirmation = useCallback(
     (deleteRoute: V1Route) =>
@@ -118,7 +132,7 @@ export default function RoutesPage() {
         ),
         labels: { confirm: 'Confirm', cancel: 'Cancel' },
         onConfirm: async () => {
-          await callQuery(headscaleServiceDeleteMachine, deleteRoute.id!);
+          await callQuery(headscaleServiceDeleteNode, deleteRoute.id!);
           mutate();
         },
       }),
@@ -161,12 +175,10 @@ export default function RoutesPage() {
                 <Text>{selectRoute.prefix}</Text>
               </Input.Wrapper>
 
-              <Input.Wrapper label="Machine">
+              <Input.Wrapper label="Node">
                 <Text>
-                  <Link to={`/machines/${selectRoute.machine?.id}`}>
-                    {selectRoute.machine?.givenName}(
-                    {selectRoute.machine?.ipAddresses?.join(' / ')} )
-                  </Link>
+                  {selectRoute.node?.givenName}(
+                  {selectRoute.node?.ipAddresses?.join(' / ')} )
                 </Text>
               </Input.Wrapper>
 
@@ -222,16 +234,16 @@ export default function RoutesPage() {
         <Skeleton visible={isLoadingRoutes} height={rem(240)}>
           <Stack my="md">
             <Select
-              label="Filter By Machine"
-              placeholder="Pick machine"
+              label="Filter By Node"
+              placeholder="Pick node"
               data={[
                 { label: 'All', value: 'All' },
-                ...(machines?.machines?.map((machine) => ({
-                  label: machine.name!,
-                  value: machine.id!,
+                ...(node?.nodes?.map((node) => ({
+                  label: node.name!,
+                  value: node.id!,
                 })) ?? []),
               ]}
-              {...filterForm.getInputProps('machineId')}
+              {...filterForm.getInputProps('nodeId')}
             />
           </Stack>
           <Table captionSide="bottom">
@@ -239,7 +251,7 @@ export default function RoutesPage() {
               <Table.Tr>
                 <Table.Th>ID</Table.Th>
                 <Table.Th>Prefix</Table.Th>
-                <Table.Th>Machine</Table.Th>
+                <Table.Th>Node</Table.Th>
                 <Table.Th>Status</Table.Th>
                 <Table.Th>Actions</Table.Th>
               </Table.Tr>
@@ -252,10 +264,8 @@ export default function RoutesPage() {
                     <Table.Td>{route.id}</Table.Td>
                     <Table.Td>{route.prefix}</Table.Td>
                     <Table.Td>
-                      <Link to={`/machines/${route.machine?.id}`}>
-                        {route.machine?.givenName}(
-                        {route.machine?.ipAddresses?.join(' / ')} )
-                      </Link>
+                      {route.node?.givenName}(
+                      {route.node?.ipAddresses?.join(' / ')} )
                     </Table.Td>
                     <Table.Td>
                       <Switch

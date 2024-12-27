@@ -1,7 +1,7 @@
 import { defineConfig } from '@kubb/core';
-import createSwagger from '@kubb/swagger';
-import createSwaggerClient from '@kubb/swagger-client';
-import createSwaggerTS from '@kubb/swagger-ts';
+import { pluginClient } from '@kubb/plugin-client';
+import { pluginOas } from '@kubb/plugin-oas';
+import { pluginTs } from '@kubb/plugin-ts';
 
 export default defineConfig({
   root: '.',
@@ -13,13 +13,17 @@ export default defineConfig({
     clean: true,
   },
   plugins: [
-    createSwagger({ output: false }),
-    createSwaggerTS({ output: { path: 'models' }, enumType: 'enum' }),
-    createSwaggerClient({
+    pluginOas(),
+    pluginTs({
+      output: { path: 'models' },
+      enumType: 'constEnum',
+      dateType: 'date',
+      unknownType: 'unknown',
+    }),
+    pluginClient({
       output: { path: './api' },
-      client: {
-        importPath: '@/utils/client',
-      },
+      client: 'fetch',
+      importPath: '@/utils/client',
     }),
   ],
 });

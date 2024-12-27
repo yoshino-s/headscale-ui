@@ -1,5 +1,8 @@
-import type { V1User } from "./V1User";
+import type { V1User } from './V1User.ts'
 
 export type V1GetUserResponse = {
-    user?: V1User;
-};
+  /**
+   * @type object | undefined
+   */
+  user?: V1User
+}

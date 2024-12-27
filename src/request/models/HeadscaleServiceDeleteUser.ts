@@ -1,24 +1,27 @@
-import type { RpcStatus } from "./RpcStatus";
-import type { V1DeleteUserResponse } from "./V1DeleteUserResponse";
+import type { RpcStatus } from './RpcStatus.ts'
+import type { V1DeleteUserResponse } from './V1DeleteUserResponse.ts'
 
 export type HeadscaleServiceDeleteUserPathParams = {
-    /**
-     * @type string
-    */
-    name: string;
-};
+  /**
+   * @type string
+   */
+  name: string
+}
 
- /**
- * @description An unexpected error response.
-*/
-export type HeadscaleServiceDeleteUserError = RpcStatus;
-
- /**
+/**
  * @description A successful response.
-*/
-export type HeadscaleServiceDeleteUserMutationResponse = V1DeleteUserResponse;
+ */
+export type HeadscaleServiceDeleteUser200 = V1DeleteUserResponse
+
+/**
+ * @description An unexpected error response.
+ */
+export type HeadscaleServiceDeleteUserError = RpcStatus
+
+export type HeadscaleServiceDeleteUserMutationResponse = HeadscaleServiceDeleteUser200
+
 export type HeadscaleServiceDeleteUserMutation = {
-    Response: HeadscaleServiceDeleteUserMutationResponse;
-    PathParams: HeadscaleServiceDeleteUserPathParams;
-    Errors: HeadscaleServiceDeleteUserError;
-};
+  Response: HeadscaleServiceDeleteUser200
+  PathParams: HeadscaleServiceDeleteUserPathParams
+  Errors: any
+}

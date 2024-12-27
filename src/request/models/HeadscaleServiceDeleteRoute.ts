@@ -1,24 +1,27 @@
-import type { RpcStatus } from "./RpcStatus";
-import type { V1DeleteRouteResponse } from "./V1DeleteRouteResponse";
+import type { RpcStatus } from './RpcStatus.ts'
+import type { V1DeleteRouteResponse } from './V1DeleteRouteResponse.ts'
 
 export type HeadscaleServiceDeleteRoutePathParams = {
-    /**
-     * @type string uint64
-    */
-    routeId: string;
-};
+  /**
+   * @type string, uint64
+   */
+  routeId: string
+}
 
- /**
- * @description An unexpected error response.
-*/
-export type HeadscaleServiceDeleteRouteError = RpcStatus;
-
- /**
+/**
  * @description A successful response.
-*/
-export type HeadscaleServiceDeleteRouteMutationResponse = V1DeleteRouteResponse;
+ */
+export type HeadscaleServiceDeleteRoute200 = V1DeleteRouteResponse
+
+/**
+ * @description An unexpected error response.
+ */
+export type HeadscaleServiceDeleteRouteError = RpcStatus
+
+export type HeadscaleServiceDeleteRouteMutationResponse = HeadscaleServiceDeleteRoute200
+
 export type HeadscaleServiceDeleteRouteMutation = {
-    Response: HeadscaleServiceDeleteRouteMutationResponse;
-    PathParams: HeadscaleServiceDeleteRoutePathParams;
-    Errors: HeadscaleServiceDeleteRouteError;
-};
+  Response: HeadscaleServiceDeleteRoute200
+  PathParams: HeadscaleServiceDeleteRoutePathParams
+  Errors: any
+}

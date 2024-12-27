@@ -1,24 +1,27 @@
-import type { RpcStatus } from "./RpcStatus";
-import type { V1EnableRouteResponse } from "./V1EnableRouteResponse";
+import type { RpcStatus } from './RpcStatus.ts'
+import type { V1EnableRouteResponse } from './V1EnableRouteResponse.ts'
 
 export type HeadscaleServiceEnableRoutePathParams = {
-    /**
-     * @type string uint64
-    */
-    routeId: string;
-};
+  /**
+   * @type string, uint64
+   */
+  routeId: string
+}
 
- /**
- * @description An unexpected error response.
-*/
-export type HeadscaleServiceEnableRouteError = RpcStatus;
-
- /**
+/**
  * @description A successful response.
-*/
-export type HeadscaleServiceEnableRouteMutationResponse = V1EnableRouteResponse;
+ */
+export type HeadscaleServiceEnableRoute200 = V1EnableRouteResponse
+
+/**
+ * @description An unexpected error response.
+ */
+export type HeadscaleServiceEnableRouteError = RpcStatus
+
+export type HeadscaleServiceEnableRouteMutationResponse = HeadscaleServiceEnableRoute200
+
 export type HeadscaleServiceEnableRouteMutation = {
-    Response: HeadscaleServiceEnableRouteMutationResponse;
-    PathParams: HeadscaleServiceEnableRoutePathParams;
-    Errors: HeadscaleServiceEnableRouteError;
-};
+  Response: HeadscaleServiceEnableRoute200
+  PathParams: HeadscaleServiceEnableRoutePathParams
+  Errors: any
+}

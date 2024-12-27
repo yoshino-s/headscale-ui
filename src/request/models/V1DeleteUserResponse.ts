@@ -1,1 +1,1 @@
-export type V1DeleteUserResponse = object;
+export type V1DeleteUserResponse = object

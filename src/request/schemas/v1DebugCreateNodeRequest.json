@@ -1,0 +1,1 @@
+{"type":"object","properties":{"user":{"type":"string"},"key":{"type":"string"},"name":{"type":"string"},"routes":{"type":"array","items":{"type":"string"}}},"x-readme-ref-name":"v1DebugCreateNodeRequest"}

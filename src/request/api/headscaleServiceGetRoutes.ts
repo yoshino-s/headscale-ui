@@ -1,15 +1,12 @@
-import client from "@/utils/client";
-import type { ResponseConfig } from "@/utils/client";
-import type { HeadscaleServiceGetRoutesQueryResponse } from "../models/HeadscaleServiceGetRoutes";
+import client from '@/utils/client'
+import type { HeadscaleServiceGetRoutesQueryResponse } from '../models/HeadscaleServiceGetRoutes.ts'
+import type { RequestConfig } from '@/utils/client'
 
 /**
-     * @summary --- Route start ---
-     * @link /api/v1/routes */
-export async function headscaleServiceGetRoutes(options: Partial<Parameters<typeof client>[0]> = {}): Promise<ResponseConfig<HeadscaleServiceGetRoutesQueryResponse>["data"]> {
-    const res = await client<HeadscaleServiceGetRoutesQueryResponse>({
-        method: "get",
-        url: `/api/v1/routes`,
-        ...options
-    });
-    return res.data;
+ * @summary --- Route start ---
+ * {@link /api/v1/routes}
+ */
+export async function headscaleServiceGetRoutes(config: Partial<RequestConfig> = {}) {
+  const res = await client<HeadscaleServiceGetRoutesQueryResponse, Error, unknown>({ method: 'GET', url: `/api/v1/routes`, ...config })
+  return res.data
 }

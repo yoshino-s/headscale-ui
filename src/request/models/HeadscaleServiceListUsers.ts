@@ -1,16 +1,19 @@
-import type { RpcStatus } from "./RpcStatus";
-import type { V1ListUsersResponse } from "./V1ListUsersResponse";
+import type { RpcStatus } from './RpcStatus.ts'
+import type { V1ListUsersResponse } from './V1ListUsersResponse.ts'
+
+/**
+ * @description A successful response.
+ */
+export type HeadscaleServiceListUsers200 = V1ListUsersResponse
 
 /**
  * @description An unexpected error response.
-*/
-export type HeadscaleServiceListUsersError = RpcStatus;
+ */
+export type HeadscaleServiceListUsersError = RpcStatus
 
- /**
- * @description A successful response.
-*/
-export type HeadscaleServiceListUsersQueryResponse = V1ListUsersResponse;
+export type HeadscaleServiceListUsersQueryResponse = HeadscaleServiceListUsers200
+
 export type HeadscaleServiceListUsersQuery = {
-    Response: HeadscaleServiceListUsersQueryResponse;
-    Errors: HeadscaleServiceListUsersError;
-};
+  Response: HeadscaleServiceListUsers200
+  Errors: any
+}

@@ -1,15 +1,12 @@
-import client from "@/utils/client";
-import type { ResponseConfig } from "@/utils/client";
-import type { HeadscaleServiceGetUserQueryResponse, HeadscaleServiceGetUserPathParams } from "../models/HeadscaleServiceGetUser";
+import client from '@/utils/client'
+import type { HeadscaleServiceGetUserQueryResponse, HeadscaleServiceGetUserPathParams } from '../models/HeadscaleServiceGetUser.ts'
+import type { RequestConfig } from '@/utils/client'
 
 /**
-     * @summary --- User start ---
-     * @link /api/v1/user/:name */
-export async function headscaleServiceGetUser(name: HeadscaleServiceGetUserPathParams["name"], options: Partial<Parameters<typeof client>[0]> = {}): Promise<ResponseConfig<HeadscaleServiceGetUserQueryResponse>["data"]> {
-    const res = await client<HeadscaleServiceGetUserQueryResponse>({
-        method: "get",
-        url: `/api/v1/user/${name}`,
-        ...options
-    });
-    return res.data;
+ * @summary --- User start ---
+ * {@link /api/v1/user/:name}
+ */
+export async function headscaleServiceGetUser(name: HeadscaleServiceGetUserPathParams['name'], config: Partial<RequestConfig> = {}) {
+  const res = await client<HeadscaleServiceGetUserQueryResponse, Error, unknown>({ method: 'GET', url: `/api/v1/user/${name}`, ...config })
+  return res.data
 }

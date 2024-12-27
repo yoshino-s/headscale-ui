@@ -1,32 +1,31 @@
-import type { RpcStatus } from "./RpcStatus";
-import type { V1SetTagsResponse } from "./V1SetTagsResponse";
+import type { HeadscaleServiceSetTagsBody } from './HeadscaleServiceSetTagsBody.ts'
+import type { RpcStatus } from './RpcStatus.ts'
+import type { V1SetTagsResponse } from './V1SetTagsResponse.ts'
 
-export type HeadscaleServiceSetTagsMutationRequest = {
-    /**
-     * @type array | undefined
-    */
-    tags?: string[];
-};
+export type HeadscaleServiceSetTagsPathParams = {
+  /**
+   * @type string, uint64
+   */
+  nodeId: string
+}
 
- export type HeadscaleServiceSetTagsPathParams = {
-    /**
-     * @type string uint64
-    */
-    machineId: string;
-};
-
- /**
- * @description An unexpected error response.
-*/
-export type HeadscaleServiceSetTagsError = RpcStatus;
-
- /**
+/**
  * @description A successful response.
-*/
-export type HeadscaleServiceSetTagsMutationResponse = V1SetTagsResponse;
+ */
+export type HeadscaleServiceSetTags200 = V1SetTagsResponse
+
+/**
+ * @description An unexpected error response.
+ */
+export type HeadscaleServiceSetTagsError = RpcStatus
+
+export type HeadscaleServiceSetTagsMutationRequest = HeadscaleServiceSetTagsBody
+
+export type HeadscaleServiceSetTagsMutationResponse = HeadscaleServiceSetTags200
+
 export type HeadscaleServiceSetTagsMutation = {
-    Response: HeadscaleServiceSetTagsMutationResponse;
-    Request: HeadscaleServiceSetTagsMutationRequest;
-    PathParams: HeadscaleServiceSetTagsPathParams;
-    Errors: HeadscaleServiceSetTagsError;
-};
+  Response: HeadscaleServiceSetTags200
+  Request: HeadscaleServiceSetTagsMutationRequest
+  PathParams: HeadscaleServiceSetTagsPathParams
+  Errors: any
+}

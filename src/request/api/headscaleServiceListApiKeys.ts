@@ -1,14 +1,11 @@
-import client from "@/utils/client";
-import type { ResponseConfig } from "@/utils/client";
-import type { HeadscaleServiceListApiKeysQueryResponse } from "../models/HeadscaleServiceListApiKeys";
+import client from '@/utils/client'
+import type { HeadscaleServiceListApiKeysQueryResponse } from '../models/HeadscaleServiceListApiKeys.ts'
+import type { RequestConfig } from '@/utils/client'
 
 /**
-     * @link /api/v1/apikey */
-export async function headscaleServiceListApiKeys(options: Partial<Parameters<typeof client>[0]> = {}): Promise<ResponseConfig<HeadscaleServiceListApiKeysQueryResponse>["data"]> {
-    const res = await client<HeadscaleServiceListApiKeysQueryResponse>({
-        method: "get",
-        url: `/api/v1/apikey`,
-        ...options
-    });
-    return res.data;
+ * {@link /api/v1/apikey}
+ */
+export async function headscaleServiceListApiKeys(config: Partial<RequestConfig> = {}) {
+  const res = await client<HeadscaleServiceListApiKeysQueryResponse, Error, unknown>({ method: 'GET', url: `/api/v1/apikey`, ...config })
+  return res.data
 }

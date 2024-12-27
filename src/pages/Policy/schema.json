@@ -1,0 +1,186 @@
+{
+ "definitions": {
+  "PolicyACL": {
+   "properties": {
+    "action": {
+     "type": "string"
+    },
+    "dst": {
+     "items": {
+      "type": "string"
+     },
+     "type": [
+      "array",
+      "null"
+     ]
+    },
+    "proto": {
+     "type": "string"
+    },
+    "src": {
+     "items": {
+      "type": "string"
+     },
+     "type": [
+      "array",
+      "null"
+     ]
+    }
+   },
+   "type": "object"
+  },
+  "PolicyACLTest": {
+   "properties": {
+    "accept": {
+     "items": {
+      "type": "string"
+     },
+     "type": [
+      "array",
+      "null"
+     ]
+    },
+    "deny": {
+     "items": {
+      "type": "string"
+     },
+     "type": "array"
+    },
+    "src": {
+     "type": "string"
+    }
+   },
+   "type": "object"
+  },
+  "PolicyAutoApprovers": {
+   "properties": {
+    "exitNode": {
+     "items": {
+      "type": "string"
+     },
+     "type": [
+      "array",
+      "null"
+     ]
+    },
+    "routes": {
+     "additionalProperties": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array"
+     },
+     "type": [
+      "object",
+      "null"
+     ]
+    }
+   },
+   "type": "object"
+  },
+  "PolicyGroups": {
+   "additionalProperties": {
+    "items": {
+     "type": "string"
+    },
+    "type": "array"
+   },
+   "type": "object"
+  },
+  "PolicyHosts": {
+   "additionalProperties": {
+    "type": "string"
+   },
+   "type": "object"
+  },
+  "PolicySSH": {
+   "properties": {
+    "action": {
+     "type": "string"
+    },
+    "checkPeriod": {
+     "type": "string"
+    },
+    "dst": {
+     "items": {
+      "type": "string"
+     },
+     "type": [
+      "array",
+      "null"
+     ]
+    },
+    "src": {
+     "items": {
+      "type": "string"
+     },
+     "type": [
+      "array",
+      "null"
+     ]
+    },
+    "users": {
+     "items": {
+      "type": "string"
+     },
+     "type": [
+      "array",
+      "null"
+     ]
+    }
+   },
+   "type": "object"
+  },
+  "PolicyTagOwners": {
+   "additionalProperties": {
+    "items": {
+     "type": "string"
+    },
+    "type": "array"
+   },
+   "type": "object"
+  }
+ },
+ "properties": {
+  "acls": {
+   "items": {
+    "$ref": "#/definitions/PolicyACL"
+   },
+   "type": [
+    "array",
+    "null"
+   ]
+  },
+  "autoApprovers": {
+   "$ref": "#/definitions/PolicyAutoApprovers"
+  },
+  "groups": {
+   "$ref": "#/definitions/PolicyGroups"
+  },
+  "hosts": {
+   "$ref": "#/definitions/PolicyHosts"
+  },
+  "ssh": {
+   "items": {
+    "$ref": "#/definitions/PolicySSH"
+   },
+   "type": [
+    "array",
+    "null"
+   ]
+  },
+  "tagOwners": {
+   "$ref": "#/definitions/PolicyTagOwners"
+  },
+  "tests": {
+   "items": {
+    "$ref": "#/definitions/PolicyACLTest"
+   },
+   "type": [
+    "array",
+    "null"
+   ]
+  }
+ },
+ "type": "object"
+}

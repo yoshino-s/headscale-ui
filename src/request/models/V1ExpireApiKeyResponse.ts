@@ -1,1 +1,1 @@
-export type V1ExpireApiKeyResponse = object;
+export type V1ExpireApiKeyResponse = object

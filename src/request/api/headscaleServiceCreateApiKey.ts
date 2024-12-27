@@ -1,16 +1,20 @@
-import client from "@/utils/client";
-import type { ResponseConfig } from "@/utils/client";
-import type { HeadscaleServiceCreateApiKeyMutationRequest, HeadscaleServiceCreateApiKeyMutationResponse } from "../models/HeadscaleServiceCreateApiKey";
+import client from '@/utils/client'
+import type { HeadscaleServiceCreateApiKeyMutationRequest, HeadscaleServiceCreateApiKeyMutationResponse } from '../models/HeadscaleServiceCreateApiKey.ts'
+import type { RequestConfig } from '@/utils/client'
 
 /**
-     * @summary --- ApiKeys start ---
-     * @link /api/v1/apikey */
-export async function headscaleServiceCreateApiKey(data?: HeadscaleServiceCreateApiKeyMutationRequest, options: Partial<Parameters<typeof client>[0]> = {}): Promise<ResponseConfig<HeadscaleServiceCreateApiKeyMutationResponse>["data"]> {
-    const res = await client<HeadscaleServiceCreateApiKeyMutationResponse, HeadscaleServiceCreateApiKeyMutationRequest>({
-        method: "post",
-        url: `/api/v1/apikey`,
-        data,
-        ...options
-    });
-    return res.data;
+ * @summary --- ApiKeys start ---
+ * {@link /api/v1/apikey}
+ */
+export async function headscaleServiceCreateApiKey(
+  data?: HeadscaleServiceCreateApiKeyMutationRequest,
+  config: Partial<RequestConfig<HeadscaleServiceCreateApiKeyMutationRequest>> = {},
+) {
+  const res = await client<HeadscaleServiceCreateApiKeyMutationResponse, Error, HeadscaleServiceCreateApiKeyMutationRequest>({
+    method: 'POST',
+    url: `/api/v1/apikey`,
+    data,
+    ...config,
+  })
+  return res.data
 }

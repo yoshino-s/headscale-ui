@@ -1,6 +1,6 @@
 export type V1ExpireApiKeyRequest = {
-    /**
-     * @type string | undefined
-    */
-    prefix?: string;
-};
+  /**
+   * @type string | undefined
+   */
+  prefix?: string
+}

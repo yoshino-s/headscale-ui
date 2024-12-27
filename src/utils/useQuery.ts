@@ -7,11 +7,10 @@ import useSwr from 'swr';
 
 import { getConfig } from './useConfig';
 
-import type { ApiError, ResponseConfig } from '@/utils/client';
-import { client } from '@/utils/client';
+import type { ApiError, RequestConfig, ResponseConfig } from '@/utils/client';
 
 export type ApiFunction<Params extends any[], T> = (
-  ...params: [...Params, Partial<Parameters<typeof client>[0]> | undefined]
+  ...params: [...Params, Partial<RequestConfig<any>> | undefined]
 ) => Promise<ResponseConfig<T>['data']>;
 
 export async function callQuery<Params extends any[], T>(

@@ -193,12 +193,12 @@ export default function UsersPage() {
                           <IconTrash />
                         </ActionIcon>
                       </Tooltip>
-                      <Tooltip label="Machines">
+                      <Tooltip label="Nodes">
                         <ActionIcon
-                          title="Machines"
+                          title="Nodes"
                           variant="light"
                           component={Link}
-                          to={`/machines/${user.name}`}
+                          to={`/machine/${user.name}`}
                         >
                           <IconDevices2 />
                         </ActionIcon>

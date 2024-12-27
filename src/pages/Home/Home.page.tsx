@@ -23,11 +23,11 @@ import classes from './Home.module.css';
 
 import {
   V1ApiKey,
+  headscaleServiceGetRoutes,
   headscaleServiceListApiKeys,
-  headscaleServiceListMachines,
+  headscaleServiceListNodes,
   headscaleServiceListUsers,
 } from '@/request';
-import { headscaleServiceListRoutes } from '@/request/api/headscaleServiceListRoutes';
 import { useMetadata } from '@/utils/useMetadata';
 import { useSwrQuery } from '@/utils/useQuery';
 
@@ -102,25 +102,24 @@ export default function HomePage() {
   const { data: apiKeys, isLoading: isLoadingApiKeys } = useSwrQuery(
     headscaleServiceListApiKeys,
   );
-  const { data: machines, isLoading: isLoadingMachines } = useSwrQuery(
-    headscaleServiceListMachines,
+  const { data: nodes, isLoading: isLoadingNodes } = useSwrQuery(
+    headscaleServiceListNodes,
     {},
   );
   const { data: routes, isLoading: isLoadingRoutes } = useSwrQuery(
-    headscaleServiceListRoutes,
-    {},
+    headscaleServiceGetRoutes,
   );
 
   return (
     <Container pt="md">
       <div className={classes.root}>
         <Status
-          title="Machines"
+          title="Nodes"
           icon={IconDevices2}
-          all={machines?.machines?.length ?? 0}
-          active={machines?.machines?.filter((m) => m.online).length ?? 0}
-          isLoading={isLoadingMachines}
-          to="/machines"
+          all={nodes?.nodes?.length ?? 0}
+          active={nodes?.nodes?.filter((m) => m.online).length ?? 0}
+          isLoading={isLoadingNodes}
+          to="/machine"
         />
         <Status
           title="Routes"

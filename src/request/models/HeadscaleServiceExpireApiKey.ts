@@ -1,20 +1,23 @@
-import type { RpcStatus } from "./RpcStatus";
-import type { V1ExpireApiKeyRequest } from "./V1ExpireApiKeyRequest";
-import type { V1ExpireApiKeyResponse } from "./V1ExpireApiKeyResponse";
+import type { RpcStatus } from './RpcStatus.ts'
+import type { V1ExpireApiKeyRequest } from './V1ExpireApiKeyRequest.ts'
+import type { V1ExpireApiKeyResponse } from './V1ExpireApiKeyResponse.ts'
+
+/**
+ * @description A successful response.
+ */
+export type HeadscaleServiceExpireApiKey200 = V1ExpireApiKeyResponse
 
 /**
  * @description An unexpected error response.
-*/
-export type HeadscaleServiceExpireApiKeyError = RpcStatus;
+ */
+export type HeadscaleServiceExpireApiKeyError = RpcStatus
 
- export type HeadscaleServiceExpireApiKeyMutationRequest = V1ExpireApiKeyRequest;
+export type HeadscaleServiceExpireApiKeyMutationRequest = V1ExpireApiKeyRequest
 
- /**
- * @description A successful response.
-*/
-export type HeadscaleServiceExpireApiKeyMutationResponse = V1ExpireApiKeyResponse;
+export type HeadscaleServiceExpireApiKeyMutationResponse = HeadscaleServiceExpireApiKey200
+
 export type HeadscaleServiceExpireApiKeyMutation = {
-    Response: HeadscaleServiceExpireApiKeyMutationResponse;
-    Request: HeadscaleServiceExpireApiKeyMutationRequest;
-    Errors: HeadscaleServiceExpireApiKeyError;
-};
+  Response: HeadscaleServiceExpireApiKey200
+  Request: HeadscaleServiceExpireApiKeyMutationRequest
+  Errors: any
+}
