@@ -51,7 +51,7 @@ export default function UsersPage() {
     data: users,
     isLoading: isLoadingUsers,
     mutate,
-  } = useSwrQuery(headscaleServiceListUsers);
+  } = useSwrQuery(headscaleServiceListUsers, {});
 
   const [opened, { open, close }] = useDisclosure(false);
   const [selectUser, setSelectUser] = useState<V1User | null>(null);

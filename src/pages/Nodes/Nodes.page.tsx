@@ -110,7 +110,7 @@ export default function NodesPage() {
     user: filterForm.values.user === 'All' ? undefined : filterForm.values.user,
   });
 
-  const { data: users } = useSwrQuery(headscaleServiceListUsers);
+  const { data: users } = useSwrQuery(headscaleServiceListUsers, {});
 
   const openDeleteConfirmation = useCallback(
     (deleteNode: V1Node) =>
