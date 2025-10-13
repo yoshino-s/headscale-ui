@@ -1,1 +1,1 @@
-{"type":"object","properties":{"name":{"type":"string"}},"x-readme-ref-name":"v1CreateUserRequest"}
+{"type":"object","properties":{"name":{"type":"string"},"displayName":{"type":"string"},"email":{"type":"string"},"pictureUrl":{"type":"string"}},"x-readme-ref-name":"v1CreateUserRequest"}

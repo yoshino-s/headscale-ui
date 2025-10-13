@@ -1,0 +1,1 @@
+{"type":"object","properties":{"routes":{"type":"array","items":{"type":"string"}}},"x-readme-ref-name":"HeadscaleServiceSetApprovedRoutesBody"}

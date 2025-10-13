@@ -2,7 +2,11 @@ import { getConfig } from '@/utils/useConfig';
 import {
   RequestConfig as BRequestConfig,
   ResponseConfig as BResponseConfig,
+  ResponseErrorConfig as BResponseErrorConfig,
 } from '@kubb/plugin-client/clients/fetch';
+
+export type ResponseErrorConfig<TError = unknown> =
+  BResponseErrorConfig<TError>;
 
 export interface RequestConfig<TData = unknown> extends BRequestConfig<TData> {
   token?: string;
@@ -52,7 +56,7 @@ export const client = async <TData, _TError = unknown, TVariables = unknown>(
       status: resp.status,
       statusText: resp.statusText,
       data: await resp.json(),
-      headers: Array.from(resp.headers.entries()),
+      headers: resp.headers,
     };
   });
 };

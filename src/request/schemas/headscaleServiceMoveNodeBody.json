@@ -1,0 +1,1 @@
+{"type":"object","properties":{"user":{"type":"string","format":"uint64"}},"x-readme-ref-name":"HeadscaleServiceMoveNodeBody"}

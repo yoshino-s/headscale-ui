@@ -23,7 +23,6 @@ import classes from './Home.module.css';
 
 import {
   V1ApiKey,
-  headscaleServiceGetRoutes,
   headscaleServiceListApiKeys,
   headscaleServiceListNodes,
   headscaleServiceListUsers,
@@ -98,6 +97,7 @@ export default function HomePage() {
 
   const { data: users, isLoading: isLoadingUsers } = useSwrQuery(
     headscaleServiceListUsers,
+    {},
   );
   const { data: apiKeys, isLoading: isLoadingApiKeys } = useSwrQuery(
     headscaleServiceListApiKeys,
@@ -106,8 +106,13 @@ export default function HomePage() {
     headscaleServiceListNodes,
     {},
   );
-  const { data: routes, isLoading: isLoadingRoutes } = useSwrQuery(
-    headscaleServiceGetRoutes,
+  const routesLength = nodes?.nodes?.reduce(
+    (acc, node) => acc + (node.availableRoutes?.length ?? 0),
+    0,
+  );
+  const enabledRoutesLength = nodes?.nodes?.reduce(
+    (acc, node) => acc + (node.approvedRoutes?.length ?? 0),
+    0,
   );
 
   return (
@@ -124,9 +129,9 @@ export default function HomePage() {
         <Status
           title="Routes"
           icon={IconRouter}
-          all={routes?.routes?.length ?? 0}
-          active={routes?.routes?.filter((r) => r.enabled).length ?? 0}
-          isLoading={isLoadingRoutes}
+          all={routesLength ?? 0}
+          active={enabledRoutesLength ?? 0}
+          isLoading={isLoadingNodes}
           to="/routes"
         />
         <Status
